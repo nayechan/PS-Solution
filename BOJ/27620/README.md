@@ -1,0 +1,34 @@
+# [Platinum II] Which Warehouse? - 27620 
+
+[문제 링크](https://www.acmicpc.net/problem/27620) 
+
+### 성능 요약
+
+메모리: 2292 KB, 시간: 4 ms
+
+### 분류
+
+그래프 이론, 최단 경로, 최대 유량, 플로이드–워셜, 최소 비용 최대 유량, 헝가리안
+
+### 제출 일자
+
+2026년 4월 10일 03:52:14
+
+### 문제 설명
+
+<p>Anaconda Inc. has a problem in several of the cities where its warehouses are located. The generic problem is the following: each city has $n$ warehouses storing $m \leq n$ different types of products distributed randomly among the warehouses (the CEO of Anaconda say the storage is not random but part of a larger master plan, but who's kidding who here). What they want to do is consolidate the warehouses by selecting $m$ of them to each store one of the $m$ products. They could randomly select the $m$ warehouses, but even the CEO knows that's probably not the smartest approach to this problem, since there is a cost in transferring the products to their designated new warehouses. What they want to do is to select the $m$ warehouses and assign them each a product so as to minimize the total of all the distances that the products must travel.</p>
+
+<p>For example, consider this situation shown in Figure L.1 (which corresponds to Sample Input 1). The figure shows three warehouses W1, W2 and W3, two products A and B, the amount of each product in each warehouse, and the distances between the warehouses. If we assign A to the W1 warehouse and B to the W2 warehouse, the total distance to move all the A's to W1 is $0(3) + 7(5) = 35$ and the total distance to move all the B's to W2 is $10(3)+3(3+5) = 54$ for a total cost of $89$ (note that the shortest path to move all the B's from W3 to W2 goes through W1). However, the best solution is to assign A to W3 and B to W1 which results in a total cost of only $58$.</p>
+
+<p style="text-align: center;"><img alt="" src="" style="width: 300px; height: 180px;"></p>
+
+<p style="text-align: center;">Figure L.1: Example warehouse and product layout</p>
+
+### 입력 
+
+ <p>Input begins with two positive integers $n$ $m$ ($n \leq 100$, $m \leq n$) indicating the number of warehouses and products, respectively. Following this are $n$ lines each with $m$ non-negative integers less than or equal to 1000. The $i$<sup>th</sup> value on the $j$<sup>th</sup> of these lines indicates the amount of product $i$ stored in warehouse $j$. Finally there follow $n$ lines each with $n$ integers. The $i$<sup>th</sup> value on the $j$<sup>th</sup> of these lines is either a non-negative value less than or equal to 100 that specifies the length of the road between warehouse $j$ to warehouse $i$, or is $-1$ that indicates that there is no road directly going from warehouse $j$ to warehouse $i$. It is possible that the distance to travel on the road from one warehouse $r$ to another warehouse $s$ may not be the same as the distance to travel on the road from $s$ to $r$. The distance from any warehouse to itself is always 0 and there is always at least one path between any two warehouses.</p>
+
+### 출력 
+
+ <p>Output the minimum distance to move all the products using the optimal assignment of products to warehouses.</p>
+
