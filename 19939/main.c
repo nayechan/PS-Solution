@@ -1,1 +1,0 @@
-main(n,k){scanf("%d%d",&n,&k);printf("%d",n<k*(k+1)/2?-1:k+(n%k>0)-1);}
