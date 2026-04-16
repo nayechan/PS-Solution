@@ -18,7 +18,7 @@ int main()
     priority_queue<int, vector<int>, less<int>> left;
     priority_queue<int, vector<int>, greater<int>> right;
 
-    bool turn = true; // true : left, false : right
+    bool turn = true; // true : minHeap, false : maxHeap
 
     for(int i=0;i<n;++i)
     {
