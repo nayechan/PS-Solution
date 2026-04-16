@@ -3,8 +3,12 @@
 
 using namespace std;
 
-void printInverse(string& preOrder, string& inOrder, unordered_map<char, int>& charToIndex, int preS, int preE, int inS, int inE)
+void printInverse(string& preOrder, string& inOrder, unordered_map<char, int> charToIndex, int preS, int preE, int inS, int inE)
 {
+	if (preS == preE) {
+		cout << preOrder[preS];
+		return;
+	}
 	if (preS > preE) {
 		return;
 	}
@@ -19,9 +23,11 @@ void printInverse(string& preOrder, string& inOrder, unordered_map<char, int>& c
 
 int main()
 {
-	string a, b;
-	while (cin >> a >> b)
+	while (!cin.eof())
 	{
+		string a, b;
+		cin >> a >> b;
+
 		unordered_map<char, int> charToIndex;
 
 		int i = 0;
