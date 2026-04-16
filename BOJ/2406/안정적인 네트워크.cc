@@ -100,7 +100,7 @@ int main()
 	}
 
 	int cost = 0;
-	while (connectedCount < n-1 && !pq.empty())
+	while (!pq.empty())
 	{
 		edge* e = pq.top();
 		if (find(root, e->from) == find(root, e->to))
