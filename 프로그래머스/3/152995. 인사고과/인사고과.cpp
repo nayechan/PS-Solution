@@ -9,7 +9,7 @@ using namespace std;
 
 int solution(vector<vector<int>> scores) {
     int n = scores.size();
-    vector<int> data(100002, -1);
+    vector<int> data(100001, -1);
     for(auto& score : scores)
     {
         data[score[0]] = max(data[score[0]], score[1]);
