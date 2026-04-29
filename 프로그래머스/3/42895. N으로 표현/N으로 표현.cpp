@@ -30,7 +30,6 @@ int solution(int N, int number) {
                     if(e2 != 0) target.push_back(e1/e2);
                     for(int t=0;t<target.size();++t)
                     {
-                        if(target[t] )
                         if(0 <= target[t] && target[t] < 1000000 && !used[target[t]])
                         {
                             num[i].push_back(target[t]);
