@@ -1,60 +1,62 @@
 #include <string>
 #include <vector>
-#include <queue>
-#include <iostream>
 
 using namespace std;
+void dfs(int v,
+         const vector<vector<int>>& child, const vector<int>& a,
+         vector<int>& in, vector<int>& out, vector<long long>& sum,
+         int& timer, int parent = -1)
+{
+    sum[timer] = a[v];
+    if(timer > 0)
+        sum[timer] += sum[timer - 1];
+    in[v] = timer++;
+    for (int u : child[v])
+        if(u != parent)
+            dfs(u, child, a, in, out, sum, timer, v);
+    out[v] = timer - 1;
+}
 
 long long solution(vector<int> a, vector<vector<int>> edges) {
-    long long answer = 0;
-    
-    vector<long long> _a(a.begin(), a.end());
-    
     int n = a.size();
-    vector<int> inEdge(n, 0);
+    
+    vector<int> in(n+1, -1), out(n+1, -1);
+    vector<long long> sum(n+1, 0);
+    
     vector<vector<int>> tree(n);
     for(const auto& edge : edges)
     {
         tree[edge[0]].push_back(edge[1]);
         tree[edge[1]].push_back(edge[0]);
-        
-        ++inEdge[edge[0]];
-        ++inEdge[edge[1]];
     }
     
-    queue<int> q;
+    int v = -1;
     for(int i=0;i<n;++i)
     {
-        if(inEdge[i] == 1)
+        if(tree[i].size() == 1)
         {
-            q.push(i);
+            v = i;
+            break;
         }
     }
     
-    int current = -1;
-    while(!q.empty())
+    int timer = 0;
+    dfs(v, tree, a, in, out, sum, timer);
+    
+    if(sum[n-1] != 0) return -1;
+    
+    long long answer = 0;
+    
+    for(int i=0;i<n;++i)
     {
-        current = q.front();
-        //cout << current << endl;
-        q.pop();
-        inEdge[current] = 0;
-        for(const auto& e : tree[current])
-        {            
-            if(inEdge[e] == 0) continue;
-            inEdge[e]--;
-            _a[e] += _a[current];
-            answer += abs(_a[current]);
-            //cout << current << " -> " << e << " : " << abs(a[current]) << endl;
-            _a[current] = 0;
-            if(inEdge[e] == 1)
-                q.push(e);
-        }
-            
+        if(i == v) continue;
+        long long subtreeSum = 0;
+        subtreeSum += sum[out[i]];
+        if(in[i]-1 >= 0)
+            subtreeSum -= sum[in[i]-1];
+        
+        answer += abs(subtreeSum);
     }
-    
-    if(_a[current] != 0)
-        answer = -1;
-    
     
     return answer;
 }
