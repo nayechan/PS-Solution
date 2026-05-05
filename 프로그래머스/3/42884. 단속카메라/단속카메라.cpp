@@ -2,12 +2,14 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
-static unsigned short indice[60002];
+unsigned short indice[60002];
 
 int solution(vector<vector<int>> routes) {    
+    memset(indice, 0, sizeof(indice));
     for(const auto& route : routes)
     {
         if(indice[route[1]+30001] < route[0]+30001)
