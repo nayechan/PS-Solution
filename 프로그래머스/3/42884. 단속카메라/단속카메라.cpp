@@ -5,21 +5,25 @@
 
 using namespace std;
 
-int solution(vector<vector<int>> routes) {
-    
-    sort(routes.begin(), routes.end(), [](const vector<int>& a, const vector<int>& b){
-        return a[1] < b[1];
-    });
-    
-    int lastCamera = -99999;
-    int cameraCount = 0;
-    
-    for (const auto& t : routes)
+static unsigned short indice[60002];
+
+int solution(vector<vector<int>> routes) {    
+    for(const auto& route : routes)
     {
-        if(t[0] > lastCamera)
+        if(indice[route[1]+30001] < route[0]+30001)
+            indice[route[1]+30001] = route[0]+30001;
+    }
+    
+    unsigned short lastCamera = 0;
+    unsigned short cameraCount = 0;
+    for (unsigned short i=1;i<=60001;++i)
+    {
+        if(indice[i] == 0) continue;
+        
+        if(indice[i] > lastCamera)
         {
             ++cameraCount;
-            lastCamera = t[1];
+            lastCamera = i;
         }
     }
     
