@@ -7,19 +7,23 @@ using namespace std;
 
 int solution(vector<vector<int>> routes) {
     
-    sort(routes.begin(), routes.end(), [](const vector<int>& a, const vector<int>& b){
-        return a[1] < b[1];
-    });
+    vector<int> indice(60001, -1);
     
-    int lastCamera = -99999;
-    int cameraCount = 0;
-    
-    for (const auto& t : routes)
+    for(const auto& route : routes)
     {
-        if(t[0] > lastCamera)
+        indice[route[1]+30000] = max(indice[route[1]+30000],route[0]+30000);
+    }
+    
+    int lastCamera = -1;
+    int cameraCount = 0;
+    for (int i=0;i<=60000;++i)
+    {
+        if(indice[i] == -1) continue;
+        
+        if(indice[i] > lastCamera)
         {
             ++cameraCount;
-            lastCamera = t[1];
+            lastCamera = i;
         }
     }
     
